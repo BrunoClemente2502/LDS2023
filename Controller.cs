@@ -13,8 +13,9 @@ namespace AnaliseImagens
 
         //Construtor sem parâmetros
         public Controller() {
-            model = new Model(this, view);
-            view = new View(this, model);
+            view = new View(this); // Pass the Controller reference to the View
+            model = new Model(this, view); // Pass both the Controller and View references to the Model
+            view.Model = model; // Set the Model reference in the View
             command = null;
 
             List<string> availableCmds = model.ListarComandos();
@@ -27,7 +28,6 @@ namespace AnaliseImagens
             {
                model.ValidarComando(command);
                model.ExecutarComando(command);
-               view.ApresentarResultados();
                 
             } catch (Exception excp)
             {
