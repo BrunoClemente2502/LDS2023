@@ -41,7 +41,7 @@ group CASO 1: while(Comando inválido)
 space
 activate Controller
 activate Model 
-Controller->Model: ExecutarComando(comando)
+Controller->Model: ValidarComando(comando)
 deactivate Controller
 space
 activate View
@@ -64,7 +64,7 @@ group CASO2: while(Path para imagem inválido)
 space
 activate Controller
 activate Model 
-Controller->Model: ExecutarComando(comando)
+Controller->Model: ValidarComando(comando)
 deactivate Controller
 space
 activate View
@@ -88,10 +88,15 @@ group CASO 3: Comando e path de imagem válidos
 space 
 activate Model 
 activate Controller 
-Controller->Model: ExecutarComando(comando)
+Controller->Model: ValidarComando(comando)
 deactivate Controller
 space
+activate View
+Model --> View: Noticação de que o comando é válido
+space
+View -> Model: ExecutarComando()
 deactivate Model
+deactivate View
 
 alt FALHA: Execução da operação com erro
 activate View 
